@@ -15,18 +15,25 @@ before_action :set_book, only: [ :show, :edit, :update, :destroy ]
   end
   
   def create
-  	@book = Book.new(book_params)
-  	@book.save
-  	redirect_to @book
-  end
+    @book = Book.new(book_params)
+    if @book.save
+      redirect_to @book, notice: "#{@book.title} was created!"
+    else
+      render :new
+    end
+end
 
   def edit
   end
 
   def update
-    @book.update(book_params)
-  	redirect_to @book
-  end
+    if @book.update(book_params)
+      redirect_to @book, notice: "#{@book.title} was created!"
+    else
+      render :new
+    end
+end
+
 
   def destroy
   	@book.destroy
